@@ -1,5 +1,4 @@
 import {createTRPCProxyClient, httpBatchLink} from '@trpc/client';
-import {serve} from 'bun';
 import type {AppRouter} from './server/router';
 
 const trpc = createTRPCProxyClient<AppRouter>({
@@ -10,7 +9,7 @@ const trpc = createTRPCProxyClient<AppRouter>({
 	],
 });
 
-serve({
+const serve = {
 	port: 8080,
 	async fetch(request: Request) {
 		const url = new URL(request.url);
@@ -31,4 +30,6 @@ serve({
 
 		return new Response('WooCommerce POS Updates Server!');
 	},
-});
+};
+
+export default serve;
