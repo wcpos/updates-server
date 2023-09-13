@@ -5,7 +5,7 @@ const trpc = createTRPCProxyClient<AppRouter>({
 	links: [
 		loggerLink(),
 		httpBatchLink({
-			url: 'http://localhost:3000',
+			url: 'http://0.0.0.0:3000',
 		}),
 	],
 });
