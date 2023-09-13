@@ -1,5 +1,10 @@
 import {z} from 'zod';
 import {initTRPC} from '@trpc/server';
+import {Octokit} from '@octokit/rest';
+
+const octokit = new Octokit({
+	auth: 'mypersonalaccesstoken123',
+});
 
 /**
  * Initialization of tRPC backend
@@ -16,7 +21,7 @@ export const router = t.router({
 			// Fetch or construct the necessary data here
 			return {
 				url: 'https://github.com/wcpos/electron/releases/download/v1.3.3/WooCommerce-POS-darwin-x64-1.3.3.zip',
-				name: 'My Release Name',
+				name: 'v1.3.3',
 				notes: 'These are some release notes innit',
 				pub_date: '2013-09-18T12:29:53+01:00',
 			};

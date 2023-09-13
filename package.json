@@ -12,6 +12,7 @@
     "client": "bun client/index.ts"
   },
   "dependencies": {
+    "@octokit/rest": "^20.0.1",
     "@trpc/client": "^10.38.1",
     "@trpc/server": "^10.38.1",
     "bun": "^1.0.1",
