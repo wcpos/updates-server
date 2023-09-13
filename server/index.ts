@@ -1,9 +1,9 @@
 import {fetchRequestHandler} from '@trpc/server/adapters/fetch';
-import {liveReload} from 'bun-livereload';
+import {serve} from 'bun';
 
-export default {
+serve({
 	port: 3000,
-	fetch: liveReload(async (request: Request) => {
+	async fetch(request: Request) {
 		if (request.method === 'OPTIONS') {
 			return new Response('', {
 				status: 200,
@@ -25,5 +25,5 @@ export default {
 		response.headers.set('Access-Control-Allow-Origin', '*');
 
 		return response;
-	}),
-};
+	},
+});
