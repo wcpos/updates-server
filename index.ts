@@ -1,14 +1,16 @@
-import {createTRPCProxyClient, httpBatchLink, loggerLink} from '@trpc/client';
-import type {AppRouter} from './server/router';
+import {router} from './api-router';
 
-const trpc = createTRPCProxyClient<AppRouter>({
-	links: [
-		loggerLink(),
-		httpBatchLink({
-			url: 'http://0.0.0.0:3000',
-		}),
-	],
-});
+// Import {createTRPCProxyClient, httpBatchLink, loggerLink} from '@trpc/client';
+// import type {AppRouter} from './server/router';
+
+// Const trpc = createTRPCProxyClient<AppRouter>({
+// 	links: [
+// 		loggerLink(),
+// 		httpBatchLink({
+// 			url: 'http://0.0.0.0:3000',
+// 		}),
+// 	],
+// });
 
 Bun.serve({
 	port: 8080,
@@ -20,7 +22,9 @@ Bun.serve({
 		if (parts[0] === 'electron') {
 			if (parts.length >= 3) {
 				const [_, platform, version, channel = ''] = parts;
-				const result = await trpc.getUpdate.query({platform, version, channel});
+				console.log('here');
+				const caller = router.createCaller({});
+				const result = await caller.getLatest({platform, version, channel});
 				return new Response(JSON.stringify(result), {status: 200, headers: {'Content-Type': 'application/json'}});
 			}
 
