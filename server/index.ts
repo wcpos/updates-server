@@ -1,6 +1,6 @@
 import {fetchRequestHandler} from '@trpc/server/adapters/fetch';
 
-const serve = {
+Bun.serve({
 	port: 3000,
 	async fetch(request: Request) {
 		if (request.method === 'OPTIONS') {
@@ -25,6 +25,6 @@ const serve = {
 
 		return response;
 	},
-};
+});
 
-export default serve;
+//

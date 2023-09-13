@@ -1,19 +1,20 @@
-import {createTRPCProxyClient, httpBatchLink} from '@trpc/client';
+import {createTRPCProxyClient, httpBatchLink, loggerLink} from '@trpc/client';
 import type {AppRouter} from './server/router';
 
 const trpc = createTRPCProxyClient<AppRouter>({
 	links: [
+		loggerLink(),
 		httpBatchLink({
 			url: 'http://localhost:3000',
 		}),
 	],
 });
 
-const serve = {
+Bun.serve({
 	port: 8080,
 	async fetch(request: Request) {
 		const url = new URL(request.url);
-		const pathname = url.pathname;
+		const {pathname} = url;
 		const parts = pathname.split(/[/?]/).filter(Boolean);
 
 		if (parts[0] === 'electron') {
@@ -30,6 +31,4 @@ const serve = {
 
 		return new Response('WooCommerce POS Updates Server!');
 	},
-};
-
-export default serve;
+});
