@@ -15,7 +15,7 @@ export const router = t.router({
 			console.log('hi');
 			// Fetch or construct the necessary data here
 			return {
-				url: `https://mycompany.example.com/myapp/releases/${version}`,
+				url: 'https://github.com/wcpos/electron/releases/download/v1.3.3/WooCommerce-POS-darwin-x64-1.3.3.zip',
 				name: 'My Release Name',
 				notes: 'These are some release notes innit',
 				pub_date: '2013-09-18T12:29:53+01:00',
