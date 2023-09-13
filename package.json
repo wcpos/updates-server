@@ -1,6 +1,12 @@
 {
   "type": "module",
   "name": "@wcpos/updates-server",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "server": "bun server/index.ts",
     "client": "bun client/index.ts"
