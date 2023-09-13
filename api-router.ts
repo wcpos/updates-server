@@ -20,17 +20,10 @@ export const router = t.router({
 			console.log('hi');
 			// Fetch or construct the necessary data here
 			return {
-				version: '1.3.4',
-				files: [
-					{
-						url: 'https://github.com/wcpos/electron/releases/download/v1.3.3/WooCommerce-POS-darwin-x64-1.3.3.zip',
-						sha512: '5dbb6254ffa6ce82400f59d37977719e924de56bd0ad7924506371e9efca4b651093a9825eb24a51833c43b8ba5f051c7e17107b63445c9c0bb2ec3419a5c4a5',
-					},
-				],
-				path: 'WooCommerce-POS-darwin-x64-1.3.3.zip',
-				sha512: '5dbb6254ffa6ce82400f59d37977719e924de56bd0ad7924506371e9efca4b651093a9825eb24a51833c43b8ba5f051c7e17107b63445c9c0bb2ec3419a5c4a5',
-				releaseDate: '2023-09-13T00:00:00.000Z',
-				releaseNotes: 'Bug fixes and performance improvements.',
+				url: 'https://github.com/wcpos/electron/releases/download/v1.3.3/WooCommerce-POS-darwin-x64-1.3.3.zip',
+				name: 'My Release Name',
+				notes: 'Theses are some release notes innit',
+				pub_date: '2013-09-18T12:29:53+01:00',
 			};
 		}),
 });
