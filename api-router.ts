@@ -71,6 +71,10 @@ function getAssetsForPlatform(assets: GithubAsset[], platformArch: string): Asse
 				return asset.name === 'RELEASES' || asset.name.endsWith('.nupkg');
 			}
 
+			if (platform === 'linux') {
+				return asset.name.endsWith('.AppImage');
+			}
+
 			return asset.name.includes(`${platform}-${arch}`) && asset.name.endsWith('.zip');
 		})
 		.map(asset => ({
