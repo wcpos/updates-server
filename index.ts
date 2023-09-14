@@ -22,10 +22,10 @@ Bun.serve({
 		if (parts[0] === 'electron') {
 			if (parts.length >= 3) {
 				const [_, platform, version, channel = ''] = parts;
-				console.log('here');
 				const caller = router.createCaller({});
 				const result = await caller.getLatest({platform, version, channel});
-				return new Response(JSON.stringify(result), {status: 200, headers: {'Content-Type': 'application/json'}});
+				console.log(result);
+				return new Response(JSON.stringify(result.data), {status: result.status, headers: {'Content-Type': 'application/json'}});
 			}
 
 			return new Response(JSON.stringify({
