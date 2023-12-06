@@ -8,14 +8,13 @@
     "node": ">=18"
   },
   "scripts": {
+    "init:db": "bun ./db/init.ts",
     "start": "bun ./index.ts"
   },
   "dependencies": {
     "@octokit/rest": "^20.0.2",
-    "@trpc/client": "^10.44.1",
-    "@trpc/server": "^10.44.1",
     "bun": "^1.0.15",
-    "zod": "^3.22.4"
+    "elysia": "^0.7.30"
   },
   "devDependencies": {
     "bun-devtools": "^0.0.2",
