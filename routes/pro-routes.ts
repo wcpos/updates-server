@@ -66,27 +66,14 @@ export const proRoutes = (app: ElysiaApp) => {
 			const downloadUrl = await proController.downloadProPlugin(params.version, query.key, query.instance);
 			set.headers['Content-Disposition'] = 'attachment; filename=woocommerce-pos-pro.zip';
 
-			return new Stream(async stream => {
-				try {
-					const response = await fetch(downloadUrl, {
-						headers: {
-							Authorization: `token ${process.env.GITHUB_PAT}`,
-							Accept: 'application/octet-stream',
-						},
-					});
-
-					if (!response.ok) {
-						console.log(response);
-						throw new Error('Network response was not ok');
-					}
-
-					stream.send(response);
-				} catch (error) {
-					console.error(error);
-					stream.send('Error downloading file');
-					stream.close();
-				}
-			});
+			return new Stream(
+				fetch(downloadUrl, {
+					headers: {
+						Authorization: `token ${process.env.GITHUB_PAT}`,
+						Accept: 'application/octet-stream',
+					},
+				}),
+			);
 		},
 		{
 			params: t.Object({
