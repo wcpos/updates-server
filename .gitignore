@@ -3,3 +3,6 @@ node_modules
 package-lock.json
 .sqlite
 db/cache/cache.sqlite
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json

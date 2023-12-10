@@ -1,17 +1,46 @@
 import {Octokit, type RestEndpointMethodTypes} from '@octokit/rest';
 
-const octokit = new Octokit({ auth: process.env.GITHUB_PAT });
+const octokit = new Octokit({auth: process.env.GITHUB_PAT});
 
 /**
- * 
+ *
  */
 export async function getLatestRelease(repo: string) {
-  const {data: release} = await octokit.repos.getLatestRelease({
-    owner: 'wcpos',
-    repo,
-  });
+	const {data: release} = await octokit.repos.getLatestRelease({
+		owner: 'wcpos',
+		repo,
+	});
 
-  return release;
+	return release;
+}
+
+/**
+ *
+ */
+export async function fetchReleaseByTag(repo: string, tag: string) {
+	try {
+		const response = await octokit.repos.getReleaseByTag({
+			owner: 'wcpos',
+			repo,
+			tag: 'v' + tag,
+		});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+/**
+ *
+ */
+export async function fetchZipByTag(repo: string, tag: string) {
+	try {
+		const release = await fetchReleaseByTag(repo, tag);
+		const asset = release.assets.find(a => a.name === 'woocommerce-pos-pro.zip');
+		return asset?.url; // Not browser_download_url
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 /**
