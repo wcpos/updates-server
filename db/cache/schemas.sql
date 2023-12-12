@@ -1,4 +1,4 @@
-CREATE TABLE github_versions_cache (
+CREATE TABLE IF NOT EXISTS github_versions_cache (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     repo_name TEXT NOT NULL,
     latest_version TEXT NOT NULL,

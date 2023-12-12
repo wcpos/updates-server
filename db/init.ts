@@ -1,8 +1,8 @@
-import { Database } from 'bun:sqlite';
-import { join } from 'path';
+import {join} from 'node:path';
+import {Database} from 'bun:sqlite';
 
 // Open a database connection
-const db = Database.open(join(import.meta.dir, 'cache', 'cache.sqlite'), { create: true });
+const db = Database.open(join(import.meta.dir, 'cache', 'cache.sqlite'), {create: true});
 
 // Read SQL from cacheSchema.sql
 const file = Bun.file(join(import.meta.dir, 'cache', 'schemas.sql'));

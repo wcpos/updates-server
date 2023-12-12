@@ -1,6 +1,7 @@
 import {Elysia, t} from 'elysia';
 import {electronRoutes} from './routes/electron-routes';
 import {proRoutes} from './routes/pro-routes';
+import {loggerPlugin} from './services/logging-service';
 
 const models = {
 	'success-response': t.Object({
@@ -17,7 +18,7 @@ const models = {
 	}),
 };
 
-const app = new Elysia().model(models);
+const app = new Elysia().use(loggerPlugin).model(models);
 
 app.get('/', () => 'Welcome to the WooCommerce POS Updates Server!');
 
