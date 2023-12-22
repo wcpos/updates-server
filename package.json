@@ -13,7 +13,8 @@
     "@elysiajs/stream": "^0.7.2",
     "@octokit/rest": "^20.0.2",
     "bun": "^1.0.15",
-    "elysia": "^0.7.30"
+    "elysia": "^0.7.30",
+    "semver": "^7.5.4"
   },
   "devDependencies": {
     "bun-devtools": "^0.0.2",
