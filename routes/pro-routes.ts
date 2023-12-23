@@ -15,7 +15,11 @@ const responseModels = {
 
 export const proRoutes = (app: ElysiaApp) => {
 	app.get('/pro/update/:version',
-		async ({params}) => proController.getUpdateDetails(params.version),
+		async ({params, set}) => {
+			const response = proController.getUpdateDetails(params.version);
+			set.status = response.status;
+			return response;
+		},
 		{
 			params: t.Object({
 				version: t.String(),

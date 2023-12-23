@@ -6,12 +6,15 @@ const octokit = new Octokit({auth: process.env.GITHUB_PAT});
  *
  */
 export async function getLatestRelease(repo: string) {
-	const {data: release} = await octokit.repos.getLatestRelease({
-		owner: 'wcpos',
-		repo,
-	});
-
-	return release;
+	try {
+		const response = await octokit.repos.getLatestRelease({
+			owner: 'wcpos',
+			repo,
+		});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 /**

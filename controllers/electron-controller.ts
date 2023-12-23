@@ -6,7 +6,7 @@ export const electronController = {
 		const release = await getLatestRelease('electron');
 
 		if (!release) {
-			return {status: 404, data: {error: 'No release found'}};
+			return {status: 404, error: 'No release found'};
 		}
 
 		/**
