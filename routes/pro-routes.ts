@@ -68,16 +68,21 @@ export const proRoutes = (app: ElysiaApp) => {
 	app.get('/pro/download/:version',
 		async ({params, query, set}) => {
 			const downloadUrl = await proController.downloadProPlugin(params.version, query.key, query.instance);
-			set.headers['Content-Disposition'] = 'attachment; filename=woocommerce-pos-pro.zip';
+			if (typeof downloadUrl === 'string') {
+				set.headers['Content-Disposition'] = 'attachment; filename=woocommerce-pos-pro.zip';
 
-			return new Stream(
-				fetch(downloadUrl, {
-					headers: {
-						Authorization: `token ${process.env.GITHUB_PAT}`,
-						Accept: 'application/octet-stream',
-					},
-				}),
-			);
+				return new Stream(
+					fetch(downloadUrl, {
+						headers: {
+							Authorization: `token ${process.env.GITHUB_PAT}`,
+							Accept: 'application/octet-stream',
+						},
+					}),
+				);
+			}
+
+			set.status = downloadUrl?.status;
+			return downloadUrl;
 		},
 		{
 			params: t.Object({
