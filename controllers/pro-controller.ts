@@ -111,8 +111,8 @@ async function downloadProPlugin(version: string, licenseKey: string, instance: 
 		if (response.status === 200 && !response.data.activated) {
 			return {
 				status: 403,
-				error: 'License not activated',
-				message: 'Your license is not activated. Please activate your license to download the plugin.',
+				error: 'License Expired',
+				message: 'Your license has expired. Please renew your license to continue receiving updates.',
 			};
 		}
 
