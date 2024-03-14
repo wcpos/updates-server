@@ -42,7 +42,6 @@ async function getLicenseStatus(licenseKey: string, instance: string) {
 	// Try to parse response
 	try {
 		const body = await response.json();
-		console.log(body);
 
 		/**
 		 * The WooCommerec AM plugin returns random codes
@@ -108,6 +107,14 @@ async function getLicenseStatus(licenseKey: string, instance: string) {
 async function downloadProPlugin(version: string, licenseKey: string, instance: string) {
 	try {
 		const response = await getLicenseStatus(licenseKey, instance);
+
+		if (response.status === 200 && !response.data.activated) {
+			return {
+				status: 403,
+				error: 'License not activated',
+				message: 'Your license is not activated. Please activate your license to download the plugin.',
+			};
+		}
 
 		if (response.status !== 200) {
 			return response;
