@@ -42,6 +42,7 @@ async function getLicenseStatus(licenseKey: string, instance: string) {
 	// Try to parse response
 	try {
 		const body = await response.json();
+		console.log(body);
 
 		/**
 		 * The WooCommerec AM plugin returns random codes
@@ -60,6 +61,29 @@ async function getLicenseStatus(licenseKey: string, instance: string) {
 					status: body.status_check,
 					...body.data,
 				},
+			};
+		}
+
+		/**
+		 * Code = 100 plus 'A customer account does not exist for this API Key.'
+		 */
+		if (body.code === '100' && body.error === 'A customer account does not exist for this API Key.') {
+			return {
+				status: 404,
+				error: 'Not Found',
+				message: 'A customer account does not exist for this API Key.',
+			};
+		}
+
+		/**
+		 * Code = 100 means there are no API slots available,
+		 * could be expired or perhaps the user has too many instances?
+		 */
+		if (body.code === '100') {
+			return {
+				status: 403,
+				error: 'License Expired',
+				message: 'Your license has expired. Please renew your license to continue receiving updates.',
 			};
 		}
 
