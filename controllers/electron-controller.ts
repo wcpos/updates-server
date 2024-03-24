@@ -75,12 +75,9 @@ async function getDownloadUrl(platform: string, version: string, channel: string
 	// Assuming we're interested in the first match
 	if (filteredAssets.length > 0) {
 		const asset = filteredAssets[0];
-		return {
-			name: asset.name,
-			url: asset.browser_download_url,
-			size: asset.size,
-			contentType: asset.content_type,
-		};
+		if (asset.browser_download_url) {
+			return asset.browser_download_url;
+		}
 	}
 
 	return {

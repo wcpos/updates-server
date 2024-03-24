@@ -1,25 +1,13 @@
 import {Elysia, t} from 'elysia';
-import {Stream} from '@elysiajs/stream';
 import {electronController} from '../controllers/electron-controller';
 
 const handleDownload = async ({params, set}) => {
 	// If 'latest' or no version is provided, you might want to dynamically determine the latest version
 	const version = params.version || 'latest';
-	const downloadInfo = await electronController.getDownloadUrl(params.platform, version, '');
+	const downloadUrl = await electronController.getDownloadUrl(params.platform, version, '');
 
-	if (downloadInfo.url && downloadInfo.size > 0) {
-		set.headers['Content-Disposition'] = `attachment; filename="${downloadInfo.name}"`;
-		set.headers['Content-Length'] = downloadInfo.size.toString();
-		set.headers['Content-Type'] = downloadInfo.contentType || 'application/octet-stream';
-
-		return new Stream(
-			fetch(downloadInfo.url, {
-				headers: {
-					Authorization: `token ${process.env.GITHUB_PAT}`,
-					Accept: 'application/octet-stream',
-				},
-			}).then(response => response.body), // Ensure that you're returning the readable stream from the fetch response
-		);
+	if (typeof downloadUrl === 'string') {
+		set.redirect = downloadUrl;
 	}
 
 	// Handle the case where downloadInfo does not contain a valid URL (e.g., an error object)
