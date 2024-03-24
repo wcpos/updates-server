@@ -11,10 +11,10 @@
     "update-deps": "bunx npm-check-updates --root --format group -i"
   },
   "dependencies": {
-    "@elysiajs/stream": "^1.0.2",
+    "@elysiajs/stream": "^0.8.0",
     "@octokit/rest": "^20.0.2",
     "bun": "^1.0.35",
-    "elysia": "^1.0.7",
+    "elysia": "^0.8.17",
     "react-dom": "^18.2.0",
     "semver": "^7.6.0"
   },
