@@ -1,7 +1,6 @@
 import {Elysia, t} from 'elysia';
 import {Stream} from '@elysiajs/stream';
 import {proController} from '../controllers/pro-controller';
-import type {ElysiaApp} from '../types';
 
 const responseModels = {
 	200: 'success-response',
@@ -13,8 +12,8 @@ const responseModels = {
 	503: 'error-response',
 };
 
-export const proRoutes = (app: ElysiaApp) => {
-	app.get('/pro/update/:version',
+export const proRoutes = new Elysia({prefix: '/pro'})
+	.get('/update/:version',
 		async ({params, set}) => {
 			const response = proController.getUpdateDetails(params.version);
 			set.status = response.status;
@@ -26,9 +25,8 @@ export const proRoutes = (app: ElysiaApp) => {
 			}),
 			response: responseModels,
 		},
-	);
-
-	app.get('/pro/license/status',
+	)
+	.get('/license/status',
 		async ({query, set}) => {
 			const response = await proController.getLicenseStatus(query.key, query.instance);
 			set.status = response.status;
@@ -41,9 +39,8 @@ export const proRoutes = (app: ElysiaApp) => {
 			}),
 			response: responseModels,
 		},
-	);
-
-	app.post('/pro/license/activate',
+	)
+	.post('/license/activate',
 		async ({body}) => proController.activateLicense(body.key, body.instance),
 		{
 			body: t.Object({
@@ -52,9 +49,8 @@ export const proRoutes = (app: ElysiaApp) => {
 			}),
 			response: responseModels,
 		},
-	);
-
-	app.post('/pro/license/deactivate',
+	)
+	.post('/license/deactivate',
 		async ({body}) => proController.deactivateLicense(body.key, body.instance),
 		{
 			body: t.Object({
@@ -63,9 +59,8 @@ export const proRoutes = (app: ElysiaApp) => {
 			}),
 			response: responseModels,
 		},
-	);
-
-	app.get('/pro/download/:version',
+	)
+	.get('/download/:version',
 		async ({params, query, set}) => {
 			const downloadUrl = await proController.downloadProPlugin(params.version, query.key, query.instance);
 			if (typeof downloadUrl === 'string') {
@@ -95,4 +90,3 @@ export const proRoutes = (app: ElysiaApp) => {
 			// Response: responseModels,
 		},
 	);
-};
