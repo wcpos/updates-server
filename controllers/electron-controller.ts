@@ -73,7 +73,17 @@ async function getDownloadUrl(platform: string, version: string, channel: string
 	});
 
 	// Assuming we're interested in the first match
-	return filteredAssets.length > 0 ? filteredAssets[0].browser_download_url : {
+	if (filteredAssets.length > 0) {
+		const asset = filteredAssets[0];
+		return {
+			name: asset.name,
+			url: asset.browser_download_url,
+			size: asset.size,
+			contentType: asset.content_type,
+		};
+	}
+
+	return {
 		status: 404,
 		error: 'No download found',
 	};
