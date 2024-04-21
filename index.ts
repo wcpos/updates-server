@@ -1,7 +1,7 @@
 import {Elysia, t} from 'elysia';
 import {electronRoutes} from './routes/electron-routes';
 import {proRoutes} from './routes/pro-routes';
-import {wpAdminRoutes} from './routes/wp-admin-routes';
+// Import {wpAdminRoutes} from './routes/wp-admin-routes';
 import {loggerPlugin} from './services/logging-service';
 
 const models = {
@@ -22,7 +22,7 @@ const models = {
 const app = new Elysia().use(loggerPlugin).model(models);
 app.use(electronRoutes);
 app.use(proRoutes);
-app.use(wpAdminRoutes);
+// App.use(wpAdminRoutes);
 
 app.get('/', () => 'Welcome to the WooCommerce POS Updates Server!');
 

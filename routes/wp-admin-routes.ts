@@ -1,5 +1,5 @@
 import {Elysia, t} from 'elysia';
-import {renderToReadableStream} from 'react-dom/server';
+import {renderToReadableStream} from 'react-dom/server'; // This caused an error?
 import {Stream} from '@elysiajs/stream';
 import {HelloWorld} from '../components/hello-world.tsx';
 
