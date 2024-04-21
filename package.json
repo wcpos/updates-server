@@ -11,17 +11,17 @@
     "update-deps": "bunx npm-check-updates --root --format group -i"
   },
   "dependencies": {
-    "@elysiajs/stream": "^0.8.0",
-    "@octokit/rest": "^20.0.2",
-    "bun": "^1.0.35",
-    "elysia": "^0.8.17",
+    "@elysiajs/stream": "^1.0.2",
+    "@octokit/rest": "^20.1.0",
+    "bun": "^1.1.4",
+    "elysia": "^1.0.13",
     "react-dom": "^18.2.0",
     "semver": "^7.6.0"
   },
   "devDependencies": {
     "bun-devtools": "^0.0.2",
-    "bun-types": "^1.0.35",
-    "typescript": "^5.4.3",
+    "bun-types": "^1.1.4",
+    "typescript": "^5.4.5",
     "xo": "^0.58.0"
   },
   "xo": {
